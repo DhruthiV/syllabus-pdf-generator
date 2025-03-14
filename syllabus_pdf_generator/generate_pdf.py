@@ -1,4 +1,4 @@
-import fitz  # PyMuPDF
+from .imports import SimpleDocTemplate, Paragraph, Spacer, BytesIO, A4
 from .syllabus_format import format_syllabus_content
 
 def generate_syllabus_pdf(syllabus):
@@ -7,13 +7,11 @@ def generate_syllabus_pdf(syllabus):
     :param syllabus: Dictionary containing syllabus details.
     :return: Bytes of the generated PDF.
     """
-    pdf = fitz.open()
-    page = pdf.new_page()
-    
-    text = format_syllabus_content(syllabus)
-    page.insert_text((50, 50), text, fontsize=10)
-    
-    pdf_bytes = pdf.write()
-    pdf.close()
-    
-    return pdf_bytes
+    buffer = BytesIO()
+    pdf = SimpleDocTemplate(buffer, pagesize=A4)
+
+    formatted_content = format_syllabus_content(syllabus)
+    pdf.build(formatted_content)
+
+    buffer.seek(0)
+    return buffer.getvalue()

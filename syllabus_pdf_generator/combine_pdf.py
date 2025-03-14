@@ -1,5 +1,6 @@
-import fitz  # PyMuPDF
+from .imports import SimpleDocTemplate, Paragraph, Spacer, BytesIO, A4
 from .syllabus_format import format_syllabus_content
+
 
 def combine_syllabi_pdfs(syllabi):
     """
@@ -7,14 +8,14 @@ def combine_syllabi_pdfs(syllabi):
     :param syllabi: List of syllabus dictionaries.
     :return: Bytes of the combined PDF.
     """
-    pdf = fitz.open()
-    
+    buffer = BytesIO()
+    pdf = SimpleDocTemplate(buffer, pagesize=A4)
+    elements = []
+
     for syllabus in syllabi:
-        page = pdf.new_page()
-        text = format_syllabus_content(syllabus)
-        page.insert_text((50, 50), text, fontsize=10)
-    
-    pdf_bytes = pdf.write()
-    pdf.close()
-    
-    return pdf_bytes
+        elements.extend(format_syllabus_content(syllabus))
+        elements.append(Spacer(1, 24))  # Space between syllabi
+
+    pdf.build(elements)
+    buffer.seek(0)
+    return buffer.getvalue()
