@@ -10,13 +10,13 @@ This package provides utility functions to generate syllabus PDFs from structure
 
 ## 📦 Installation  
 ```bash
-pip install git+https://github.com/DhruthiV/syllabus_pdf_generator.git
+pip install git+https://github.com/DhruthiV/syllabus-pdf-generator.git
 ```
 ## 🔄 Upgrading to the Latest Version
 ```bash
-pip install --upgrade git+https://github.com/DhruthiV/syllabus_pdf_generator.git
+pip install --upgrade git+https://github.com/DhruthiV/syllabus-pdf-generator.git
 ```
 If the upgrade doesn’t work as expected, force reinstall with:
 ```bash
-pip install --force-reinstall git+https://github.com/DhruthiV/syllabus_pdf_generator.git
+pip install --force-reinstall git+https://github.com/DhruthiV/syllabus-pdf-generator.git
 ```
